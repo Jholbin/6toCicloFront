@@ -1,0 +1,105 @@
+<app-menu></app-menu>
+<div class="container">
+  <div class="row">
+    <mat-toolbar color="primary">
+      <span>Consultar Libro</span>
+    </mat-toolbar>
+  </div><!-- CORTEZ -->
+  <div><br /><br /></div>
+  <div class="row formulario-dos-columnas">
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input [(ngModel)]="titulo" matInput />
+      </mat-form-field><!-- CORTEZ -->
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Año de Publicación</mat-label>
+        <input [(ngModel)]="anio" matInput type="number" />
+      </mat-form-field>
+    </div>
+    <div class="col-md-3"><!-- CORTEZ -->
+      <mat-form-field>
+        <mat-label>Serie</mat-label>
+        <input [(ngModel)]="serie" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field><!-- CORTEZ -->
+        <mat-label>Categoría</mat-label>
+        <mat-select [(ngModel)]="idCategoriaLibro">
+          <mat-option value="-1">[Seleccione]</mat-option>
+          <mat-option
+            *ngFor="let c of lstCategorias"
+            [value]="c.idDataCatalogo">
+            {{ c.descripcion }}
+          </mat-option>
+        </mat-select><!-- CORTEZ -->
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="idDataCatalogo"><!-- CORTEZ -->
+          <mat-option value="-1">[Seleccione]</mat-option>
+          <mat-option *ngFor="let t of lstTipos" [value]="t.idDataCatalogo">
+            {{ t.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4" style="margin-top: 1.2%">
+      <button mat-raised-button type="submit" color="primary" (click)="consulta()">Consultar</button> &nbsp;
+      <button mat-raised-button type="submit" color="warn" (click)="exportarPDF()">PDF</button> &nbsp;
+      <!--<button mat-raised-button type="submit" color="success" (click)="exportarExcel()">Excel</button>-->
+    </div><!-- CORTEZ -->
+  </div>
+  <div style="margin-top: 3%">
+    <mat-table [dataSource]="dataSource" style="width: 100%">
+      <ng-container matColumnDef="idLibro">
+        <th mat-header-cell *matHeaderCellDef style="width: 80px">Id</th>
+        <td mat-cell *matCellDef="let aux" style="width: 80px">
+          {{ aux.idLibro }}
+        </td><!-- CORTEZ -->
+      </ng-container>
+      <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef style="width: 300px">Titulo</th>
+        <td mat-cell *matCellDef="let aux" style="width: 300px">
+          {{ aux.titulo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="anio"><!-- CORTEZ -->
+        <th mat-header-cell *matHeaderCellDef style="width: 230px">Año de Publicación</th>
+        <td mat-cell *matCellDef="let aux" style="width: 230px">
+          {{ aux.anio }}
+        </td>
+      </ng-container>
+     <ng-container matColumnDef="serie">
+        <th mat-header-cell *matHeaderCellDef style="width: 200px">Serie</th>
+        <td mat-cell *matCellDef="let aux" style="width: 200px">
+          {{ aux.serie }}<!-- CORTEZ -->
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="idCategoriaLibro">
+        <th mat-header-cell *matHeaderCellDef style="width: 200px">Categoría</th>
+        <td mat-cell *matCellDef="let aux" style="width: 200px">
+          {{ aux.categoriaLibro.descripcion }}
+        </td>
+      </ng-container> <!-- CORTEZ -->
+      <ng-container matColumnDef="idDataCatalogo">
+        <th mat-header-cell *matHeaderCellDef style="width: 200px">Tipo</th>
+        <td mat-cell *matCellDef="let aux" style="width: 200px">
+          {{ aux.tipoLibro.descripcion }}
+        </td><!-- CORTEZ -->
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <div><br /><br/></div><!-- CORTEZ -->
+    <mat-paginator
+      [pageSizeOptions]="[10, 20, 50]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

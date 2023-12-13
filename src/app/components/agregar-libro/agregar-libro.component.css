@@ -1,0 +1,11 @@
+/*CORTEZ*/
+.formulario-dos-columnas {
+    display: flex;
+    flex-wrap: wrap;
+  }/*CORTEZ*/
+  
+  .formulario-dos-columnas > div {
+    flex: 1;/*CORTEZ*/
+    margin-right: 10px; /*CORTEZ*/
+  }
+  
